@@ -299,7 +299,7 @@
     .then(bind(writeSlowly, time(80), "!!"))
     .then(bind(outputLink, "  Email    →  ", "lua@foxgirl.dev", "mailto:lua@foxgirl.dev"))
     .then(bind(outputLink, "  Twitter  →  ", "luavixen", "https://twitter.com/luavixen"))
-    .then(bind(outputLink, "  GitHub   →  ", "luawtf", "https://github.com/luawtf"))
+    .then(bind(outputLink, "  GitHub   →  ", "luavixen", "https://github.com/luavixen"))
     .then(targetAppendTextNode)
     .then(nextLine)
     .then(bind(writeSlowly, time(50), "Thank you for checking out my page"))
