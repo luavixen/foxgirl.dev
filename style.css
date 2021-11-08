@@ -17,10 +17,10 @@ a, a:hover, a:visited, a:active {
 @font-face {
   font-family: "Unifont";
   src:
-    url("./font/unifont-compact.woff2") format("woff2"),
-    url("./font/unifont-compact.woff") format("woff"),
-    url("./font/unifont-compact.otf") format("otf"),
-    url("./font/unifont-compact.eot") format("eot");
+    url("/font/unifont-compact.woff2") format("woff2"),
+    url("/font/unifont-compact.woff") format("woff"),
+    url("/font/unifont-compact.otf") format("otf"),
+    url("/font/unifont-compact.eot") format("eot");
 }
 
 pre {
