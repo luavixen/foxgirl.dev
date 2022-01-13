@@ -182,7 +182,9 @@
 
   function wait(timeout, value) {
     return createPending(function (resolve) {
-      _setTimeout(resolve, timeout, value);
+      _setTimeout(function () {
+        resolve(value);
+      }, timeout);
     });
   }
 
