@@ -97,17 +97,9 @@ pre {
             user-select: none;
 }
 
-#eyes > img {
+#eyes-image {
   display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   width: 100%;
-}
-
-#eyes-outline {
-  position: relative !important;
 }
 
 #terminal {
@@ -115,4 +107,10 @@ pre {
   width: 100%;
   min-height: 22em;
   margin: 0;
+}
+
+#skip {
+  display: block;
+  margin: 0;
+  text-align: center;
 }

@@ -45,8 +45,7 @@
     var callbacks = [];
 
     var executeCallbacks = function () {
-      var callbackList = callbacks;
-      callbacks = null;
+      var callbackList = callbacks; callbacks = null;
       for (var i = 0; i < callbackList.length; i++) {
         (0, callbackList[i])();
       }
@@ -103,6 +102,12 @@
     };
   }
 
+  var skipButtonElement = _document.getElementById("skip-button");
+  function skipRemove(value) {
+    skipButtonElement.remove();
+    return value;
+  }
+
   var time = (function () {
     var speedMultiplier = 1;
 
@@ -111,19 +116,33 @@
 
       var tsNow = (new _Date()).getTime();
       var tsLastVisit = _localStorage.getItem(storageItem);
-      var msDiff = tsNow - tsLastVisit;
+      var tsDiff = tsNow - tsLastVisit;
 
-      if (msDiff < 180000) {
+      if (tsDiff < 180000) {
         speedMultiplier = 3;
-      } else if (tsNow - tsLastVisit < 600000) {
+      } else if (tsDiff < 600000) {
         speedMultiplier = 2;
       }
 
       _localStorage.setItem(storageItem, "" + tsNow);
     }
 
+    if (speedMultiplier > 1) {
+      skipButtonElement.removeChild(skipButtonElement.firstChild);
+      skipButtonElement.appendChild(_document.createTextNode("speedy typing"));
+    }
+
+    skipButtonElement.onclick = function (ev) {
+      skipRemove();
+      ev.preventDefault();
+      speedMultiplier = 1000;
+      _console.log("going speedy mode");
+    };
+
     return function (ms) {
-      return ms / speedMultiplier;
+      return function () {
+        return ms / speedMultiplier;
+      };
     };
   })();
 
@@ -174,17 +193,23 @@
     };
   })();
 
+  function provider(value) {
+    return function () {
+      return value;
+    };
+  }
+
   function bind(arg0) {
     var argFn = arg0;
     arg0 = this;
     return _Function_prototype_bind.apply(argFn, arguments);
   }
 
-  function wait(timeout, value) {
+  function wait(timefn, value) {
     return createPending(function (resolve) {
       _setTimeout(function () {
         resolve(value);
-      }, timeout);
+      }, timefn());
     });
   }
 
@@ -198,7 +223,7 @@
     return target;
   }
 
-  function writeSlowly(timeout, text, target) {
+  function writeSlowly(timefn, text, target) {
     return createPending(function (resolve, reject) {
       cursor.stop();
       var index = 0;
@@ -214,7 +239,7 @@
         }
         cursor.blink();
         _clearInterval(handle);
-      }, timeout);
+      }, timefn());
     });
   }
 
@@ -302,6 +327,8 @@
     .then(bind(outputLink, "  Email    →  ", "lua@foxgirl.dev", "mailto:lua@foxgirl.dev"))
     .then(bind(outputLink, "  Twitter  →  ", "luavixen", "https://twitter.com/luavixen"))
     .then(bind(outputLink, "  GitHub   →  ", "luavixen", "https://github.com/luavixen"))
+    .then(bind(outputLink, "  Fursona  →  ", "/vikkie/", "https://foxgirl.dev/vikkie/"))
+    .then(skipRemove)
     .then(targetAppendTextNode)
     .then(nextLine)
     .then(bind(writeSlowly, time(50), "Thank you for checking out my page"))
@@ -310,7 +337,7 @@
     .then(bind(writeSlowly, time(120), "<3"))
     .then(bind(wait, time(300)))
     .then(bind(writeSlowly, time(80), "\n\n\n\n"))
-    .then(bind(wait, 5000))
+    .then(bind(wait, provider(5000)))
     .then(cursor.hide)
     .then(function () { _console.log("printing completed"); }, _console.error);
 
