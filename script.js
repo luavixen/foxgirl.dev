@@ -109,7 +109,7 @@
   }
 
   var time = (function () {
-    var speedMultiplier = 1;
+    var speedMultiplier = 1.25;
 
     if (_localStorage) {
       var storageItem = "foxdev-last-visit";
@@ -266,9 +266,9 @@
     , "least-privileged user account"
     //"link-up america"
     , "the portuguese word for the moon"
-    , "the portuguese word for the moon derived from the latin word l\u016Bna"
+    , "the portuguese word for the moon, derived from the latin word l\u016Bna"
     , "the portuguese word for a full moon"
-    , "the word used to call somebody moody in portuguese"
+    //"the word used to call somebody moody in portuguese"
     , "the lightweight embeddable programming language"
     , "the programming language that powers roblox"
     , "the programming language that powers garry's mod"
@@ -303,7 +303,7 @@
       .then(targetAppendTextNode);
   }
 
-  wait(time(2000))
+  wait(time(700))
     .then(targetAppendTextNode)
     .then(bind(writeSlowly, time(50), "Hello netcitizen"))
     .then(bind(writeSlowly, time(80), ", "))
@@ -325,8 +325,9 @@
     .then(bind(writeSlowly, time(40), "You should come find me around the web"))
     .then(bind(writeSlowly, time(80), "!!"))
     .then(bind(outputLink, "  Email    →  ", "lua@foxgirl.dev", "mailto:lua@foxgirl.dev"))
-    .then(bind(outputLink, "  Twitter  →  ", "luavixen", "https://twitter.com/luavixen"))
-    .then(bind(outputLink, "  GitHub   →  ", "luavixen", "https://github.com/luavixen"))
+    .then(bind(outputLink, "  Twitter  →  ", "twitter.com/luavixen", "https://twitter.com/luavixen"))
+    .then(bind(outputLink, "  GitHub   →  ", "github.com/luavixen", "https://github.com/luavixen"))
+    .then(bind(outputLink, "  Ko-fi    →  ", "ko-fi.com/luavixen", "https://ko-fi.com/luavixen"))
     .then(bind(outputLink, "  Fursona  →  ", "/vikkie/", "https://foxgirl.dev/vikkie/"))
     .then(skipRemove)
     .then(targetAppendTextNode)

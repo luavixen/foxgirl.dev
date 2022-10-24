@@ -29,9 +29,8 @@ pre {
 
   word-wrap: break-word;
   white-space: -moz-pre-wrap;
-  white-space:     -pre-wrap;
-  white-space:   -o-pre-wrap;
-  white-space:      pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
 }
 
 .announcement {
@@ -90,11 +89,11 @@ pre {
 
   pointer-events: none;
   -webkit-touch-callout: none;
-    -webkit-user-select: none;
-     -khtml-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #eyes-image {
