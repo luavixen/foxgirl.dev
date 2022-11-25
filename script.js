@@ -325,6 +325,7 @@
     .then(bind(writeSlowly, time(40), "You should come find me around the web"))
     .then(bind(writeSlowly, time(80), "!!"))
     .then(bind(outputLink, "  Email    →  ", "lua@foxgirl.dev", "mailto:lua@foxgirl.dev"))
+    .then(bind(outputLink, "  Cohost   →  ", "cohost.org/lua", "https://cohost.org/lua"))
     .then(bind(outputLink, "  Twitter  →  ", "twitter.com/luavixen", "https://twitter.com/luavixen"))
     .then(bind(outputLink, "  GitHub   →  ", "github.com/luavixen", "https://github.com/luavixen"))
     .then(bind(outputLink, "  Ko-fi    →  ", "ko-fi.com/luavixen", "https://ko-fi.com/luavixen"))
