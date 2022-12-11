@@ -7,10 +7,12 @@ html, body {
 
 body {
   height: 100%;
+  color: black;
+  background-color: white;
 }
 
 a, a:hover, a:visited, a:active {
-  color: inherit;
+  color: black;
   text-decoration: none;
 }
 
@@ -27,13 +29,20 @@ pre {
   font-family: "Unifont", "monospace", monospace;
   font-size: 16px;
 
+  font-smooth: never;
+  -webkit-font-smoothing : none;
+
   word-wrap: break-word;
   white-space: -moz-pre-wrap;
   white-space: -o-pre-wrap;
   white-space: pre-wrap;
 }
 
-.announcement {
+.fox-hidden {
+  display: none;
+}
+
+.fox-announcement {
   position: fixed;
   top: 0;
   left: 0;
@@ -61,30 +70,30 @@ pre {
   justify-content: center;
 }
 
-.announcement > pre {
+.fox-announcement > pre {
   margin: 64px 0 64px 0;
   text-align: center;
 }
 
-.container {
+.fox-container {
   position: relative;
   width: 100%;
   max-width: 752px;
   margin: 64px auto 64px auto;
 }
 
-.content {
+.fox-content {
   position: absolute;
   left: 16px;
   right: 16px;
 }
 
-.content > * {
+.fox-content > * {
   position: relative;
   margin-bottom: 64px;
 }
 
-#eyes {
+#fox-eyes {
   width: 100%;
 
   pointer-events: none;
@@ -96,19 +105,19 @@ pre {
   user-select: none;
 }
 
-#eyes-image {
+#fox-eyes-image {
   display: block;
   width: 100%;
 }
 
-#terminal {
+#fox-terminal {
   display: block;
   width: 100%;
   min-height: 22em;
   margin: 0;
 }
 
-#skip {
+#fox-skip {
   display: block;
   margin: 0;
   text-align: center;

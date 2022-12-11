@@ -1,14 +1,14 @@
 (function() {
 
-  var _Function_prototype_bind = Function.prototype.bind;
-  var _Array = Array;
+  var _Array_prototype_slice = Array.prototype.slice;
   var _Date = Date;
+  var _Math = Math;
   var _setTimeout = setTimeout;
   var _setInterval = setInterval;
   var _clearInterval = clearInterval;
   var _console = console;
-  var _localStorage = window.localStorage;
   var _document = document;
+  var _localStorage = window.localStorage;
 
   function resolveRecursively(value, fnResolved) {
     if (value != null) try {
@@ -102,9 +102,10 @@
     };
   }
 
-  var skipButtonElement = _document.getElementById("skip-button");
+  var skipElement = _document.getElementById("fox-skip-button");
   function skipRemove(value) {
-    skipButtonElement.remove();
+    var parent = skipElement.parentElement;
+    if (parent) parent.removeChild(skipElement);
     return value;
   }
 
@@ -128,13 +129,17 @@
     }
 
     if (speedMultiplier > 1) {
-      skipButtonElement.removeChild(skipButtonElement.firstChild);
-      skipButtonElement.appendChild(_document.createTextNode("speedy typing"));
+      skipElement.removeChild(skipElement.firstChild);
+      skipElement.appendChild(_document.createTextNode("speedy typing"));
     }
 
-    skipButtonElement.onclick = function (ev) {
+    skipElement.onclick = function (ev) {
+      if (ev.preventDefault) {
+        ev.preventDefault();
+      } else {
+        ev.returnValue = false;
+      }
       skipRemove();
-      ev.preventDefault();
       speedMultiplier = 1000;
       _console.log("going speedy mode");
     };
@@ -147,10 +152,10 @@
   })();
 
   var cursor = (function () {
-    var element = _document.getElementById("cursor");
+    var element = _document.getElementById("fox-cursor");
 
     function toggle(shown) {
-      element.style.display = shown ? "initial" : "none";
+      element.className = shown ? "" : "hidden";
     }
 
     var blinkTimeout = 500;
@@ -199,10 +204,12 @@
     };
   }
 
-  function bind(arg0) {
-    var argFn = arg0;
-    arg0 = this;
-    return _Function_prototype_bind.apply(argFn, arguments);
+  function bind(fn) {
+    var args1 = _Array_prototype_slice.call(arguments, 1);
+    return function () {
+      var args2 = _Array_prototype_slice.call(arguments, 0);
+      return fn.apply(this, args1.concat(args2));
+    };
   }
 
   function wait(timefn, value) {
@@ -213,7 +220,7 @@
     });
   }
 
-  var targetElement = _document.getElementById("target");
+  var targetElement = _document.getElementById("fox-target");
   function targetAppendTextNode() {
     return targetElement.appendChild(_document.createTextNode(""));
   }
@@ -246,7 +253,7 @@
   function outputLink(prefix, text, href) {
     return wait(time(100))
       .then(targetAppendTextNode)
-      .then(bind(writeSlowly, time(10), "\n"))
+      .then(bind(writeSlowly, time(10), "\r\n"))
       .then(bind(writeSlowly, time(30), prefix))
       .then(function () {
         var targetLink = targetElement.appendChild(_document.createElement("a"));
@@ -260,7 +267,7 @@
   }
 
   function outputQuotes() {
-    var quoteList = [
+    var quotes = [
       "love u always"
     //"licking under armpits"
     , "least-privileged user account"
@@ -275,22 +282,13 @@
     //"the ancient hawaiian martial art"
     , "Lua Saturni, the not-so-well-known roman goddess"
     ];
-    var quoteCount = quoteList.length;
 
     var pending = wait(time(100)).then(targetAppendTextNode);
 
-    var selectedCount = 5;
-    var selectedList = new _Array(selectedCount);
-
-    for (var i = selectedCount; i--; ) for (var n = quoteCount; n--; ) {
-      var selectedQuote = quoteList[Math.random() * quoteCount | 0];
-      if (selectedList.indexOf(selectedQuote) < 0) {
-        selectedList.push(selectedQuote);
-        pending = pending
-          .then(bind(wait, time(300)))
-          .then(bind(writeOverwrite, selectedQuote));
-        break;
-      }
+    for (var n = 5; n--; ) {
+      pending = pending
+        .then(bind(wait, time(300)))
+        .then(bind(writeOverwrite, quotes.splice(_Math.random() * quotes.length | 0, 1)[0]));
     }
 
     return pending;
@@ -298,7 +296,7 @@
 
   function nextLine(target) {
     return wait(time(100), target)
-      .then(bind(writeSlowly, time(10), "\n\n"))
+      .then(bind(writeSlowly, time(10), "\r\n\r\n"))
       .then(bind(wait, time(100)))
       .then(targetAppendTextNode);
   }
@@ -338,7 +336,7 @@
     .then(bind(writeSlowly, time(80), " "))
     .then(bind(writeSlowly, time(120), "<3"))
     .then(bind(wait, time(300)))
-    .then(bind(writeSlowly, time(80), "\n\n\n\n"))
+    .then(bind(writeSlowly, time(80), "\r\n\r\n\r\n\r\n"))
     .then(bind(wait, provider(5000)))
     .then(cursor.hide)
     .then(function () { _console.log("printing completed"); }, _console.error);
