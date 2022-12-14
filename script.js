@@ -1,14 +1,22 @@
 (function() {
 
-  var _Array_prototype_slice = Array.prototype.slice;
-  var _Date = Date;
   var _Math = Math;
+  var _Date = Date;
+  var _Array_prototype_slice = Array.prototype.slice;
   var _setTimeout = setTimeout;
   var _setInterval = setInterval;
   var _clearInterval = clearInterval;
-  var _console = console;
-  var _document = document;
   var _localStorage = window.localStorage;
+  var _document = window.document;
+  var _console = window.console;
+
+  if (_console == null) {
+    var logInfo = function () {};
+    var logError = function () {
+      alert(_Array_prototype_slice.call(arguments).join(' '));
+    };
+    _console = { log: logInfo, error: logError };
+  }
 
   function resolveRecursively(value, fnResolved) {
     if (value != null) try {
@@ -253,7 +261,7 @@
   function outputLink(prefix, text, href) {
     return wait(time(100))
       .then(targetAppendTextNode)
-      .then(bind(writeSlowly, time(10), "\r\n"))
+      .then(bind(writeSlowly, time(10), "\n"))
       .then(bind(writeSlowly, time(30), prefix))
       .then(function () {
         var targetLink = targetElement.appendChild(_document.createElement("a"));
@@ -296,7 +304,7 @@
 
   function nextLine(target) {
     return wait(time(100), target)
-      .then(bind(writeSlowly, time(10), "\r\n\r\n"))
+      .then(bind(writeSlowly, time(10), "\n\n"))
       .then(bind(wait, time(100)))
       .then(targetAppendTextNode);
   }
@@ -336,7 +344,7 @@
     .then(bind(writeSlowly, time(80), " "))
     .then(bind(writeSlowly, time(120), "<3"))
     .then(bind(wait, time(300)))
-    .then(bind(writeSlowly, time(80), "\r\n\r\n\r\n\r\n"))
+    .then(bind(writeSlowly, time(80), "\n\n\n\n"))
     .then(bind(wait, provider(5000)))
     .then(cursor.hide)
     .then(function () { _console.log("printing completed"); }, _console.error);
