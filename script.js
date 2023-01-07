@@ -332,7 +332,7 @@
     .then(bind(writeSlowly, time(80), "!!"))
     .then(bind(outputLink, "  Email    \u2192  ", "lua@foxgirl.dev", "mailto:lua@foxgirl.dev"))
     .then(bind(outputLink, "  Twitter  \u2192  ", "twitter.com/luavixen", "https://twitter.com/luavixen"))
-    .then(bind(outputLink, "  Mastodon \u2192  ", "vixen.zone/lua", "https://vixen.zone/lua"))
+    .then(bind(outputLink, "  Mastodon \u2192  ", "vixen.zone/@lua", "https://vixen.zone/@lua"))
     .then(bind(outputLink, "  Cohost   \u2192  ", "cohost.org/lua", "https://cohost.org/lua"))
     .then(bind(outputLink, "  GitHub   \u2192  ", "github.com/luavixen", "https://github.com/luavixen"))
     .then(bind(outputLink, "  Ko-fi    \u2192  ", "ko-fi.com/luavixen", "https://ko-fi.com/luavixen"))
