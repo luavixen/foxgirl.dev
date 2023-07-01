@@ -334,6 +334,7 @@
     .then(bind(outputLink, "  Twitter  \u2192  ", "twitter.com/luavixen", "https://twitter.com/luavixen"))
     .then(bind(outputLink, "  Mastodon \u2192  ", "vixen.zone/@lua", "https://vixen.zone/@lua"))
     .then(bind(outputLink, "  Cohost   \u2192  ", "cohost.org/lua", "https://cohost.org/lua"))
+    .then(bind(outputLink, "  Tumblr   \u2192  ", "tumblr.com/luavixen", "https://www.tumblr.com/luavixen"))
     .then(bind(outputLink, "  GitHub   \u2192  ", "github.com/luavixen", "https://github.com/luavixen"))
     .then(bind(outputLink, "  Ko-fi    \u2192  ", "ko-fi.com/luavixen", "https://ko-fi.com/luavixen"))
     .then(bind(outputLink, "  Fursona  \u2192  ", "/vikkie/", "https://foxgirl.dev/vikkie/"))
