@@ -117,6 +117,11 @@
     return value;
   }
 
+  var signatureElement = _document.getElementById("fox-signature-image");
+  function signatureShow() {
+    signatureElement.className = "";
+  }
+
   var time = (function () {
     var speedMultiplier = 1.5;
 
@@ -163,7 +168,7 @@
     var element = _document.getElementById("fox-cursor");
 
     function toggle(shown) {
-      element.className = shown ? "" : "hidden";
+      element.className = shown ? "" : "fox-hidden";
     }
 
     var blinkTimeout = 500;
@@ -327,12 +332,12 @@
     .then(bind(writeSlowly, time(40), "and a professional foxgirl"))
     .then(bind(writeSlowly, time(80), " "))
     .then(bind(writeSlowly, time(120), ":3"))
-  //.then(nextLine)
-  //.then(bind(writeSlowly, time(40), "I offer commission-based programming services"))
-  //.then(bind(writeSlowly, time(80), ". "))
-  //.then(bind(writeSlowly, time(40), "If you need a Minecraft mod, Discord bot, or anything else"))
-  //.then(bind(writeSlowly, time(80), ", "))
-  //.then(bind(writeSlowly, time(40), "contact me for a quote!"))
+    .then(nextLine)
+    .then(bind(writeSlowly, time(40), "I offer commission-based programming services"))
+    .then(bind(writeSlowly, time(80), ". "))
+    .then(bind(writeSlowly, time(40), "If you need a Minecraft mod, Discord bot, website, or anything else"))
+    .then(bind(writeSlowly, time(80), ", "))
+    .then(bind(writeSlowly, time(40), "contact me for a quote!"))
     .then(nextLine)
     .then(bind(writeSlowly, time(40), "You should come find me around the web"))
     .then(bind(writeSlowly, time(80), "!!"))
@@ -343,7 +348,7 @@
   //.then(bind(outputLink, "  Tumblr   \u2192  ", "tumblr.com/luavixen", "https://www.tumblr.com/luavixen"))
     .then(bind(outputLink, "  GitHub   \u2192  ", "github.com/luavixen", "https://github.com/luavixen"))
     .then(bind(outputLink, "  Ko-fi    \u2192  ", "ko-fi.com/luavixen", "https://ko-fi.com/luavixen"))
-    .then(bind(outputLink, "  Fursona  \u2192  ", "/vikkie/", "https://foxgirl.dev/vikkie/"))
+    .then(bind(outputLink, "  Sona     \u2192  ", "/vikkie/", "https://foxgirl.dev/vikkie/"))
     .then(skipRemove)
     .then(targetAppendTextNode)
     .then(nextLine)
@@ -353,8 +358,9 @@
     .then(bind(writeSlowly, time(120), "<3"))
     .then(bind(wait, time(300)))
     .then(bind(writeSlowly, time(80), "\n\n\n\n"))
-    .then(bind(wait, provider(5000)))
+    .then(bind(wait, provider(3000)))
     .then(cursor.hide)
+    .then(signatureShow)
     .then(function () { _console.log("printing completed"); }, _console.error);
 
   _console.log("hey !!! i see u snooping around back here :3");

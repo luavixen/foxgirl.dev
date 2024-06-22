@@ -7,17 +7,19 @@ html, body {
 
 body {
   height: 100%;
-  color: black;
+  color: #262262;
   background-color: white;
 }
 
 a, a:hover, a:visited, a:active {
-  color: black;
+  color: #262262;
   text-decoration: none;
 }
 
 @font-face {
   font-family: "Unifont";
+  font-weight: 400;
+  font-style: normal;
   src:
     url("/font/unifont-compact.woff2") format("woff2"),
     url("/font/unifont-compact.woff") format("woff"),
@@ -25,12 +27,18 @@ a, a:hover, a:visited, a:active {
     url("/font/unifont-compact.eot") format("eot");
 }
 
-pre {
-  font-family: "Unifont", "monospace", monospace;
-  font-size: 16px;
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-weight: 400;
+  font-style: normal;
+  src:
+    url("/font/IBMPlexMono-Regular-Latin1.woff2") format("woff2"),
+    url("/font/IBMPlexMono-Regular-Latin1.woff") format("woff");
+  unicode-range: U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+FB01-FB02
+}
 
-  font-smooth: never;
-  -webkit-font-smoothing : none;
+pre {
+  font-family: "monospace", monospace;
 
   word-wrap: break-word;
   white-space: -moz-pre-wrap;
@@ -38,8 +46,22 @@ pre {
   white-space: pre-wrap;
 }
 
+pre.fox-ibmplex {
+  font-family: "IBM Plex Mono", "monospace", monospace;
+  font-weight: 400;
+  font-style: normal;
+}
+
+pre.fox-unifont {
+  font-family: "Unifont", "monospace", monospace;
+  font-size: 16px;
+
+  font-smooth: never;
+  -webkit-font-smoothing : none;
+}
+
 .fox-hidden {
-  display: none;
+  display: none !important;
 }
 
 .fox-announcement {
@@ -121,4 +143,14 @@ pre {
   display: block;
   margin: 0;
   text-align: center;
+}
+
+#fox-signature {
+  display: block;
+  height: 64px;
+}
+
+#fox-signature-image {
+  display: block;
+  margin: auto;
 }

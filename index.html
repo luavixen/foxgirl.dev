@@ -4,9 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>foxgirl dot dev</title>
-    <link rel="preload" href="/font/unifont-compact.woff2" as="font">
+    <link rel="preload" href="/font/IBMPlexMono-Regular-Latin1.woff2" as="font">
     <link rel="stylesheet" href="/style.css">
-    <link rel="preload" href="/images/eyes_large.jpg" as="image">
+    <link rel="preload" href="/images/branding-logo-a.png" as="image">
+    <link rel="preload" href="/images/branding-tail.png" as="image">
     <link rel="preload" href="/script.js" as="script">
     <meta name="description" content="Lua's personal website">
     <meta name="twitter:card" content="summary_large_image">
@@ -22,10 +23,13 @@
   <body class="fox-container">
     <div class="fox-content">
       <div id="fox-eyes" role="none" aria-hidden="true">
-        <img id="fox-eyes-image" src="/images/eyes_large.jpg">
+        <img id="fox-eyes-image" src="/images/branding-logo-a.png">
       </div>
-      <pre id="fox-terminal"><span><noscript>JavaScript is required for this page</noscript></span><span id="fox-target"></span><span id="fox-cursor">_</span></pre>
-      <pre id="fox-skip"><a id="fox-skip-button" href="#">skip typing</a></pre>
+      <pre id="fox-terminal" class="fox-ibmplex"><span><noscript>JavaScript is required for this page</noscript></span><span id="fox-target"></span><span id="fox-cursor">_</span></pre>
+      <pre id="fox-skip" class="fox-ibmplex"><a id="fox-skip-button" href="#">skip typing</a></pre>
+      <div id="fox-signature" role="none" aria-hidden="true">
+        <img id="fox-signature-image" class="fox-hidden" src="/images/branding-tail.png" width="64">
+      </div>
     </div>
     <script src="/script.js"></script>
   </body>
