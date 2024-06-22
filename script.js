@@ -123,7 +123,7 @@
   }
 
   var time = (function () {
-    var speedMultiplier = 1.5;
+    var speedMultiplier = 1.8;
 
     if (_localStorage) {
       var storageItem = "foxdev-last-visit";
@@ -133,9 +133,9 @@
       var tsDiff = tsNow - tsLastVisit;
 
       if (tsDiff < 180000) {
-        speedMultiplier = 3;
+        speedMultiplier = 3.5;
       } else if (tsDiff < 600000) {
-        speedMultiplier = 2;
+        speedMultiplier = 2.5;
       }
 
       _localStorage.setItem(storageItem, "" + tsNow);
@@ -159,7 +159,7 @@
 
     return function (ms) {
       return function () {
-        return ms / speedMultiplier;
+        return speedMultiplier < 5 ? ms / speedMultiplier : 0;
       };
     };
   })();
@@ -263,20 +263,22 @@
     });
   }
 
-  function outputLink(prefix, text, href) {
+  function outputLink(text, href) {
+    var targetLink = targetElement.appendChild(_document.createElement("a"));
+    return wait(time(100), targetLink.appendChild(_document.createTextNode("")))
+      .then(bind(writeSlowly, time(40), text))
+      .then(bind(wait, time(10)))
+      .then(function () {
+        targetLink.href = href;
+      });
+  }
+
+  function outputLinkPrefixed(prefix, text, href) {
     return wait(time(100))
       .then(targetAppendTextNode)
       .then(bind(writeSlowly, time(10), "\n"))
       .then(bind(writeSlowly, time(30), prefix))
-      .then(function () {
-        var targetLink = targetElement.appendChild(_document.createElement("a"));
-        return wait(time(100), targetLink.appendChild(_document.createTextNode("")))
-          .then(bind(writeSlowly, time(40), text))
-          .then(bind(wait, time(10)))
-          .then(function () {
-            targetLink.href = href;
-          });
-      });
+      .then(bind(outputLink, text, href));
   }
 
   function outputQuotes() {
@@ -333,22 +335,26 @@
     .then(bind(writeSlowly, time(80), " "))
     .then(bind(writeSlowly, time(120), ":3"))
     .then(nextLine)
-    .then(bind(writeSlowly, time(40), "I offer commission-based programming services"))
+    .then(bind(writeSlowly, time(40), "I offer software development commissions"))
     .then(bind(writeSlowly, time(80), ". "))
     .then(bind(writeSlowly, time(40), "If you need a Minecraft mod, Discord bot, website, or anything else"))
     .then(bind(writeSlowly, time(80), ", "))
-    .then(bind(writeSlowly, time(40), "contact me for a quote!"))
+    .then(bind(writeSlowly, time(40), "contact me!"))
+    .then(bind(writeSlowly, time(80), " "))
+    .then(bind(outputLink, "details & terms", "/commissions/"))
+    .then(targetAppendTextNode)
     .then(nextLine)
     .then(bind(writeSlowly, time(40), "You should come find me around the web"))
     .then(bind(writeSlowly, time(80), "!!"))
-    .then(bind(outputLink, "  Email    \u2192  ", "lua@foxgirl.dev", "mailto:lua@foxgirl.dev"))
-    .then(bind(outputLink, "  Twitter  \u2192  ", "twitter.com/luavixen", "https://twitter.com/luavixen"))
-    .then(bind(outputLink, "  Mastodon \u2192  ", "vixen.zone/@lua", "https://vixen.zone/@lua"))
-  //.then(bind(outputLink, "  Cohost   \u2192  ", "cohost.org/lua", "https://cohost.org/lua"))
-  //.then(bind(outputLink, "  Tumblr   \u2192  ", "tumblr.com/luavixen", "https://www.tumblr.com/luavixen"))
-    .then(bind(outputLink, "  GitHub   \u2192  ", "github.com/luavixen", "https://github.com/luavixen"))
-    .then(bind(outputLink, "  Ko-fi    \u2192  ", "ko-fi.com/luavixen", "https://ko-fi.com/luavixen"))
-    .then(bind(outputLink, "  Sona     \u2192  ", "/vikkie/", "https://foxgirl.dev/vikkie/"))
+    .then(bind(outputLinkPrefixed, "  Email    \u2192  ", "lua@foxgirl.dev", "mailto:lua@foxgirl.dev"))
+    .then(bind(outputLinkPrefixed, "  Discord  \u2192  ", "@luavixen_", "https://discord.com/users/1174552240862806046"))
+    .then(bind(outputLinkPrefixed, "  GitHub   \u2192  ", "github.com/luavixen", "https://github.com/luavixen"))
+    .then(bind(outputLinkPrefixed, "  Ko-fi    \u2192  ", "ko-fi.com/luavixen", "https://ko-fi.com/luavixen"))
+    .then(bind(outputLinkPrefixed, "  Twitter  \u2192  ", "twitter.com/luavixen", "https://twitter.com/luavixen"))
+    .then(bind(outputLinkPrefixed, "  Mastodon \u2192  ", "vixen.zone/@lua", "https://vixen.zone/@lua"))
+  //.then(bind(outputLinkPrefixed, "  Cohost   \u2192  ", "cohost.org/lua", "https://cohost.org/lua"))
+  //.then(bind(outputLinkPrefixed, "  Tumblr   \u2192  ", "tumblr.com/luavixen", "https://www.tumblr.com/luavixen"))
+    .then(bind(outputLinkPrefixed, "  Sona     \u2192  ", "/vikkie/", "https://foxgirl.dev/vikkie/"))
     .then(skipRemove)
     .then(targetAppendTextNode)
     .then(nextLine)

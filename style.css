@@ -13,7 +13,20 @@ body {
 
 a, a:hover, a:visited, a:active {
   color: #262262;
+  text-decoration: underline;
+}
+
+a:hover {
   text-decoration: none;
+}
+
+pre {
+  font-family: "monospace", monospace;
+
+  word-wrap: break-word;
+  white-space: -moz-pre-wrap;
+  white-space: -o-pre-wrap;
+  white-space: pre-wrap;
 }
 
 @font-face {
@@ -37,22 +50,13 @@ a, a:hover, a:visited, a:active {
   unicode-range: U+0020-007E, U+00A0-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2013-2014, U+2018-201A, U+201C-201E, U+2020-2022, U+2026, U+2030, U+2039-203A, U+2044, U+20AC, U+2122, U+2212, U+FB01-FB02
 }
 
-pre {
-  font-family: "monospace", monospace;
-
-  word-wrap: break-word;
-  white-space: -moz-pre-wrap;
-  white-space: -o-pre-wrap;
-  white-space: pre-wrap;
-}
-
-pre.fox-ibmplex {
+.fox-ibmplex {
   font-family: "IBM Plex Mono", "monospace", monospace;
   font-weight: 400;
   font-style: normal;
 }
 
-pre.fox-unifont {
+.fox-unifont {
   font-family: "Unifont", "monospace", monospace;
   font-size: 16px;
 
