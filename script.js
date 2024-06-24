@@ -329,7 +329,7 @@
     .then(targetAppendTextNode)
     .then(bind(writeSlowly, time(100), "\""))
     .then(nextLine)
-    .then(bind(writeSlowly, time(40), "I'm an avid computer programmer and systems administrator"))
+    .then(bind(writeSlowly, time(40), "I'm an avid software engineer, computer scientist, systems administrator"))
     .then(bind(writeSlowly, time(80), ", "))
     .then(bind(writeSlowly, time(40), "and a professional foxgirl"))
     .then(bind(writeSlowly, time(80), " "))
