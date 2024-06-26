@@ -65,7 +65,17 @@ pre {
 }
 
 .fox-hidden {
-  display: none !important;
+  visibility: hidden !important;
+}
+
+.fox-unselectable {
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .fox-announcement {
@@ -121,14 +131,6 @@ pre {
 
 #fox-eyes {
   width: 100%;
-
-  pointer-events: none;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
 
 #fox-eyes-image {

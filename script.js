@@ -7,6 +7,7 @@
   var _setInterval = setInterval;
   var _clearInterval = clearInterval;
   var _localStorage = window.localStorage;
+  var _navigator = window.navigator;
   var _document = window.document;
   var _console = window.console;
 
@@ -109,6 +110,8 @@
       }
     };
   }
+
+  var isRobot = (/googlebot|adsbot|mediapartners|bing|msnbot|duckduckbot|yahoo|ecosia|kagi|baidu|yandex|teoma|slurp|spider|crawl/i).test(_navigator.userAgent);
 
   var skipElement = _document.getElementById("fox-skip-button");
   function skipRemove(value) {
@@ -225,12 +228,18 @@
     };
   }
 
-  function wait(timefn, value) {
-    return createPending(function (resolve) {
-      _setTimeout(function () {
+  function wait(fnTime, value) {
+    if (isRobot) {
+      return createPending(function (resolve) {
         resolve(value);
-      }, timefn());
-    });
+      });
+    } else {
+      return createPending(function (resolve) {
+        _setTimeout(function () {
+          resolve(value);
+        }, fnTime());
+      });
+    }
   }
 
   var targetElement = _document.getElementById("fox-target");
@@ -243,7 +252,13 @@
     return target;
   }
 
-  function writeSlowly(timefn, text, target) {
+  function writeSlowly(fnTime, text, target) {
+    if (isRobot) {
+      return createPending(function (resolve) {
+        target.nodeValue += text;
+        resolve(target);
+      });
+    }
     return createPending(function (resolve, reject) {
       cursor.stop();
       var index = 0;
@@ -259,7 +274,7 @@
         }
         cursor.blink();
         _clearInterval(handle);
-      }, timefn());
+      }, fnTime());
     });
   }
 
