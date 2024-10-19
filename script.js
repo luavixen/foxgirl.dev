@@ -111,7 +111,7 @@
     };
   }
 
-  var isRobot = (/googlebot|adsbot|mediapartners|bing|msnbot|duckduckbot|yahoo|ecosia|kagi|baidu|yandex|teoma|slurp|spider|crawl/i).test(_navigator.userAgent);
+  var isRobot = (/googlebot|adsbot|mediapartners|bing|msnbot|duckduckbot|yahoo|ecosia|kagi|baidu|yandex|teoma|slurp|spider|crawl|archive/i).test(_navigator.userAgent);
 
   var skipElement = _document.getElementById("fox-skip-button");
   function skipRemove(value) {
